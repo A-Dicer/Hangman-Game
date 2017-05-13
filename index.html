@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Hangman</title>
+  </head>
+  <body>
+
+    
+    
+    <div id="letterUsed"></div>
+    <div id="comment"></div>
+    
+
+    <script type="text/javascript">
+
+
+      // This function is run whenever the user presses a key.
+      document.onkeyup = function(event) {
+
+        // Determines which key was pressed
+        var letter = event.key;
+
+      
+        // Randomly chooses a choice from the options array. This is the Computer's guess.
+       // var computerGuess = options[Math.floor(Math.random() * options.length)];
+
+        // Alerts the Computer's guess.
+        
+    
+      // object for game info
+
+      var game = {
+            wins: 2,
+            letterUsed: [],
+            letterResult: false,
+      }
+
+      //get letters from page that have been selected and split them
+      game.letterUsed = document.getElementById("letterUsed").innerHTML.split("");
+    
+      //loop this array to see if you are dooping letters
+      for  (var i = 0; i < game.letterUsed.length; i++) {
+          if (letter === game.letterUsed[i]){
+            game.letterResult = true;
+          }     
+      }    
+    
+      // if you dooped a letter place this on page
+      if (game.letterResult) {
+        document.getElementById("comment").innerHTML = "you already used this!";
+      }
+
+      // else add letter to page 
+      else {
+        document.getElementById("comment").innerHTML = "";
+        document.getElementById("letterUsed").innerHTML = game.letterUsed.join("") + letter;
+      }
+
+
+
+
+}
+    </script>
+  
+  </body>
+</html>
