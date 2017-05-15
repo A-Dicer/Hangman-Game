@@ -1,10 +1,11 @@
       // object for game info
-      var game = {       
-            words: ["PHILLIP J FRY", "BENDER",],
+          var game = {       
+            words: ["PHILLIP-J-FRY", "BENDER",],
             wordChosen: "",
             wordGuess: [],
-            guesses: 6,
+            guesses: 8,
             wins: 0,
+            losses: 0,
             letter: "",
             letterUsed: [],
             letterResult: false,
@@ -13,8 +14,38 @@
             idComment: document.getElementById("comment"),
             idLetter: document.getElementById("letterUsed"),
             idGuess: document.getElementById("guesses"),
+            idWins: document.getElementById("wins"),
+            idLosses: document.getElementById("losses"),
 
+            
+            //code to start / restart the game
+            start: function(){
+              this.wordGuess = [];
+              this.letterUsed = [];
+              this.guesses = 8;
+              this.idComment.innerHTML = "";
+              this.idWord.innerHTML = "";
+              this.idGuess.innerHTML = 8;
+              this.idLetter.innerHTML ="";
 
+              this.random();
+              // log name for game
+              console.log("Game Word: " + this.wordChosen);
+     
+              // word split into array
+              this.wordChosen = this.wordChosen.split("");
+     
+              //places the dashes for the start on screen
+              this.txtStart();
+              this.idWord.innerHTML = this.wordGuess.join(" ");
+            },
+
+            //gets randome word for game
+            random: function(){
+              game.wordChosen = game.words[Math.floor(Math.random() * game.words.length)];
+            },
+
+            
             //checks to see if letter has already been used
             usedCheck: function() {
               for  (var i = 0; i < this.letterUsed.length && this.letterResult === false; i++) {
@@ -23,9 +54,9 @@
                 }
               }  
 
-              console.log("letter: " + this.letter);
-              console.log("letter used status: " + this.letterResult);
-              console.log("--------");
+              console.log("---------------------------");
+              console.log("Letter: " + this.letter);
+              console.log("Previously Used: " + this.letterResult);
             },
 
             //resets result to false
@@ -41,8 +72,8 @@
             // fromats the guessed word into an array
             txtStart: function() {
               for (var i = 0; i < this.wordChosen.length; i++){
-                if (this.wordChosen[i] === " "){
-                  this.wordGuess[i] = " - ";
+                if (this.wordChosen[i] === "-"){
+                  this.wordGuess[i] = "-";
                 } 
                 else { 
                   this.wordGuess[i] = " _ ";
@@ -66,95 +97,104 @@
                 } 
               }
             },
-      }
-    
-      // randomly select word for game
-      game.wordChosen = game.words[Math.floor(Math.random() * game.words.length)];
-      
 
-      // log name for game
-      console.log("Game Word: " + game.wordChosen);
-     
-      // word split into array
-      game.wordChosen = game.wordChosen.split("");
-    
-      // make a loop to go through 
-      
-     
-      //places the dashes for the start
-      game.txtStart();
+            //checks to see if you won
+            winCheck: function(){
+              if (this.wordChosen.join("") === this.wordGuess.join("")){
+                this.wins = 1 + this.wins;
+                this.idWins.innerHTML = this.wins;
+                this.start();
+              }
+            },
 
-      console.log(game.wordChosen);
-      game.idWord.innerHTML = game.wordGuess.join(" ");
+            //checks to see if you lost
+            lossCheck: function(){
+              if (this.guesses === 0){
+                this.losses = this.losses + 1;
+                this.idLosses.innerHTML = this.losses;
+                this.start();
+              }
+            },
+
+            txtLoweCase: function(){
+              this.letter = String.fromCharCode(event.keyCode).toUpperCase();
+            },
+
+            keyRun: function(){
+              if (this.letter.match(/[A-Z]/) != null) {
+
+        
+                //Checks to see if you have used letter 
+                this.usedCheck();   
+
+                // if yes .....
+                if (this.letterResult) {
+            
+                  //placed comment on page
+                  this.idComment.innerHTML = "You already used the letter " + this.letter + "!";
+            
+                  //set result back to false
+                  this.resetResult() ;
+                }
+
+                // If not .....
+                else { 
+            
+                  // add the letter to the letters used array
+                  this.letterUsed.push(this.letter);
+
+                  //removes any comment placed 
+                  this.idComment.innerHTML = "";
+
+                  //join the letters used into string and place on page
+                  this.idLetter.innerHTML = this.letterUsed.join(" ");
+
+                  //check to see if letter is in chosen word
+                  this.txtCheck();
+            
+                  //if yes .....
+                  if (this.txtResult) {
+
+                    this.txtRun();
+
+                    console.log("In Word: " + game.txtResult)
+              
+                    //places the found letters on the page
+                    this.idWord.innerHTML = this.wordGuess.join(" ");
+
+                    //resets txt check to false
+                    this.txtReset();
+                  }
+
+                  // If not .....
+                  else {
+             
+                    //removes 1 guess from guesses
+                    this.guesses = this.guesses - 1;
+
+                    //place on page
+                    this.idGuess.innerHTML = this.guesses; 
+
+                    console.log("In Word: " + game.txtResult);
+                  }
+                } 
+              } 
+            },
+          }
+    
+      // start the game on load
+      game.start();
       
       // This function is run whenever the user presses a key.
       document.onkeyup = function(event) {
 
         // Determines which key was pressed and make lower case
-        game.letter = String.fromCharCode(event.keyCode).toUpperCase();
-        
+        game.txtLoweCase();
         
         // Checks to see if a letter was pressed   
-        if (game.letter.match(/[A-Z]/) != null) {
-
-        
-          //Checks to see if you have used letter 
-          game.usedCheck();   
-
-          // if yes .....
-          if (game.letterResult) {
-            
-            //placed comment on page
-            game.idComment.innerHTML = "you already used this!";
-            
-            //set result back to false
-            game.resetResult() ;
-          }
-
-          // If not .....
-          else { 
-            
-            // add the letter to the letters used array
-            game.letterUsed.push(game.letter);
-
-            //removes any comment placed 
-            game.idComment.innerHTML = "";
-
-            //join the letters used into string and place on page
-            game.idLetter.innerHTML = game.letterUsed.join(" ");
-            console.log(game.wordGuess);
-
-            //check to see if letter is in chosen word
-            game.txtCheck();
-            
-            //if yes .....
-             if (game.txtResult) {
-
-              game.txtRun();
-
-              console.log("text result: " + game.txtResult)
-              
-              //places the found letters on the page
-              game.idWord.innerHTML = game.wordGuess.join(" ");
-
-              //resets txt check to false
-              game.txtReset();
-            }
-
-            // If not .....
-            else {
-             
-              //removes 1 guess from guesses
-              game.guesses = game.guesses - 1;
-
-              //place on page
-              game.idGuess.innerHTML = game.guesses; 
-
-
-            }
-          } 
-        }
-        console.log(game.guesses);
+        game.keyRun();
+        game.winCheck();
+        game.lossCheck();
       }
   
-  console.log(game.letterUsed);
+  
