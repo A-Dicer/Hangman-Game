@@ -3,20 +3,24 @@
   <head>
     <meta charset="UTF-8">
     <title>Hangman</title>
-    
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     
   </head>
   <body>
-    <div id="wins">0</div>
-    <div id="losses">0</div>
-    <div id="guesses">6</div>
-    <div id="word"></div>
-    <div id="letterUsed"></div>
-    <div id="comment"></div>
-    
+  <main class="border" style="width: 350px; height: 600px; margin:0 auto;">
+    <section>
+      <div id="wins" class="" style="width: 200px;">Wins: 0 - (0%)</div>
+      <div id="losses">Losses: 0 - (0%)</div>  
+      <div id="guesses">Guesses Remaining: 8</div>
+      <div id="word" style="width: 100%; text-align: center; font-size: 175%; padding: 0 5px;"></div>
+      <div>Letters Previously Used:</div>
+      <div id="letterUsed"></div>
+      <div id="comment"></div>
+      
+  </main>
 
-    <script src="assets/javaScript/game.js"></script>
+  <script src="assets/javaScript/game.js"></script>
   
   </body>
 </html>

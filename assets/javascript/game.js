@@ -1,11 +1,15 @@
-      // object for game info
+
+// object for game info ------------------------------------
+
           var game = {       
-            words: ["PHILLIP-J-FRY", "BENDER",],
+            words: ["PHILLIP-J-FRY", "BENDER", "TURANGA-LEELA", "DR-ZOIDBERG", "AMY-WONG", "PROFESSOR-FARNSWORTH", "KIF-KROKER", "ZAPP-BRANNIGAN", "SCRUFFY", "NIBBLER", "HERMES-CONRAD", "HYPNOTOAD", "LRRR", "MOM", "ROBOT-DEVIL", "URL", "CALCULON", "HEDIONISM-BOT"],
             wordChosen: "",
             wordGuess: [],
             guesses: 8,
             wins: 0,
+            winP: "",
             losses: 0,
+            lossP: "",
             letter: "",
             letterUsed: [],
             letterResult: false,
@@ -17,6 +21,10 @@
             idWins: document.getElementById("wins"),
             idLosses: document.getElementById("losses"),
 
+            Percent: function(){
+              this.winP = this.wins / (this.wins + this.losses) *100 ; 
+              this.lossP = this.losses / (this.losses + this.wins) *100;
+            },
             
             //code to start / restart the game
             start: function(){
@@ -25,10 +33,12 @@
               this.guesses = 8;
               this.idComment.innerHTML = "";
               this.idWord.innerHTML = "";
-              this.idGuess.innerHTML = 8;
+              this.idGuess.innerHTML = "Guesses Remaining: " + 8;
               this.idLetter.innerHTML ="";
 
+              //get random word
               this.random();
+
               // log name for game
               console.log("Game Word: " + this.wordChosen);
      
@@ -42,7 +52,7 @@
 
             //gets randome word for game
             random: function(){
-              game.wordChosen = game.words[Math.floor(Math.random() * game.words.length)];
+              this.wordChosen = this.words[Math.floor(Math.random() * this.words.length)];
             },
 
             
@@ -102,7 +112,9 @@
             winCheck: function(){
               if (this.wordChosen.join("") === this.wordGuess.join("")){
                 this.wins = 1 + this.wins;
-                this.idWins.innerHTML = this.wins;
+                this.Percent();
+                this.idWins.innerHTML = "Wins: " + this.wins + " - (" + this.winP.toFixed() + "%)";
+                this.idLosses.innerHTML = "Losses: " + this.losses + " - (" + this.lossP.toFixed() + "%)";
                 this.start();
               }
             },
@@ -111,7 +123,9 @@
             lossCheck: function(){
               if (this.guesses === 0){
                 this.losses = this.losses + 1;
-                this.idLosses.innerHTML = this.losses;
+                this.Percent();
+                this.idWins.innerHTML = "Wins: " + this.wins + " - (" + this.winP.toFixed() + "%)";
+                this.idLosses.innerHTML = "Losses: " + this.losses + " - (" + this.lossP.toFixed() + "%)";
                 this.start();
               }
             },
@@ -157,7 +171,7 @@
 
                     this.txtRun();
 
-                    console.log("In Word: " + game.txtResult)
+                    console.log("In Word: " + this.txtResult)
               
                     //places the found letters on the page
                     this.idWord.innerHTML = this.wordGuess.join(" ");
@@ -173,15 +187,19 @@
                     this.guesses = this.guesses - 1;
 
                     //place on page
-                    this.idGuess.innerHTML = this.guesses; 
+                    this.idGuess.innerHTML = "Guesses Remaining: " + this.guesses; 
 
-                    console.log("In Word: " + game.txtResult);
+                    console.log("In Word: " + this.txtResult);
                   }
                 } 
               } 
             },
           }
     
+
+// calls for game to work ------------------
+
+
       // start the game on load
       game.start();
       
@@ -193,7 +211,11 @@
         
         // Checks to see if a letter was pressed   
         game.keyRun();
+
+        //check to see if you won
         game.winCheck();
+
+        //check to see if you lost
         game.lossCheck();
       }
   
