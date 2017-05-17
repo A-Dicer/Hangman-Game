@@ -2,7 +2,7 @@
 // object for game info ------------------------------------
 
           var game = {       
-            words: ["PHILLIP-J-FRY", "BENDER", "TURANGA-LEELA", "DR-ZOIDBERG", "AMY-WONG", "PROFESSOR-FARNSWORTH", "KIF-KROKER", "ZAPP-BRANNIGAN", "SCRUFFY", "NIBBLER", "HERMES-CONRAD", "HYPNOTOAD", "LRRR", "MOM", "ROBOT-DEVIL", "URL", "CALCULON", "HEDIONISM-BOT"],
+            words: ["PHILIP-J-FRY", "BENDER", "TURANGA-LEELA", "DR-ZOIDBERG", "AMY-WONG", "PROFESSOR-FARNSWORTH", "KIF-KROKER", "ZAPP-BRANNIGAN", "SCRUFFY", "NIBBLER", "HERMES-CONRAD", "HYPNOTOAD", "LRRR", "MOM", "ROBOT-DEVIL", "URL", "CALCULON", "HEDIONISM-BOT"],
             wordChosen: "",
             wordGuess: [],
             guesses: 8,
@@ -135,16 +135,21 @@
             },
 
             keyRun: function(){
+
+              // Determines which key was pressed and make lower case
+              this.txtLoweCase();
+
+              //checks to if you typed a letter
               if (this.letter.match(/[A-Z]/) != null) {
 
         
-                //Checks to see if you have used letter 
+                //Checks to see if you have used letter previosly 
                 this.usedCheck();   
 
                 // if yes .....
                 if (this.letterResult) {
             
-                  //placed comment on page
+                  //place comment on page
                   this.idComment.innerHTML = "You already used the letter " + this.letter + "!";
             
                   //set result back to false
@@ -205,9 +210,6 @@
       
       // This function is run whenever the user presses a key.
       document.onkeyup = function(event) {
-
-        // Determines which key was pressed and make lower case
-        game.txtLoweCase();
         
         // Checks to see if a letter was pressed   
         game.keyRun();
