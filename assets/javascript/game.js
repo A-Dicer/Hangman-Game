@@ -47,6 +47,7 @@
             idWordBio: document.getElementById("wordBio"),
             idWorL: document.getElementById("WorL"),
             idHint: document.getElementById("hint"),
+            idSound: document.getElementById("sound"),
 
             info: function(){
               for (var i = 0; i < this.words.length; i++){
@@ -56,6 +57,7 @@
               this.idName.innerHTML = this.wordChosen.join("");
               this.idWordImg.src = "assets/images/" + this.wordNumber + ".png";
               this.idWordBio.innerHTML = this.hints[this.wordNumber];
+              this.idSound.src = "assets/sounds/" + this.wordNumber + ".mp3";
             },
 
             Percent: function(){
@@ -159,6 +161,7 @@
                 this.idLosses.innerHTML = "Losses: " + this.losses + " - (" + this.lossP.toFixed() + "%)";
                 this.idInfo.style.display = "block";
                 this.idWorL.innerHTML = "You Won!";
+                this.idSound.play();
                 setTimeout(myFunction , 10000);
               }
             },
@@ -178,6 +181,7 @@
                 this.idLosses.innerHTML = "Losses: " + this.losses + " - (" + this.lossP.toFixed() + "%)";
                 this.idInfo.style.display = "block";
                 this.idWorL.innerHTML = "You Lost!";
+                this.idSound.play();
                 setTimeout(myFunction , 10000);
               }
             },
