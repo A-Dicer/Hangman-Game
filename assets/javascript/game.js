@@ -2,7 +2,7 @@
 // object for game info ------------------------------------
 
           var game = {       
-            words: ["PHILIP-J-FRY", "BENDER", "TURANGA-LEELA", "DR-ZOIDBERG", "AMY-WONG", "PROF-FARNSWORTH", "KIF-KROKER", "ZAPP-BRANNIGAN", "SCRUFFY", "NIBBLER", "HERMES-CONRAD", "HYPNOTOAD", "LRRR", "MOM", "ROBOT-DEVIL", "URL", "CALCULON", "HEDIONISMBOT"],
+            words: ["PHILIP-J-FRY", "BENDER", "TURANGA-LEELA", "DR-ZOIDBERG", "AMY-WONG", "THE-PROFESSOR", "KIF-KROKER", "ZAPP-BRANNIGAN", "CALCULON", "NIBBLER", "HERMES-CONRAD", "HYPNOTOAD", "LRRR", "MOM", "ROBOT-DEVIL",],
             
             hints: [ "He is generally very lazy at work, spending most of his time in the office sitting on the couch: watching TV and drinking Slurm.",
                     "He gambles, smokes cigars, consorts with hookerbots, has 100,000 terabytes of porn on his hard drive.",
@@ -12,16 +12,14 @@
                     "He is pushing the limits of even the 31st century at an agе of well over 160.",
                     "He is an undisclosed Amphibiosan alien of light green color from the planеt Amphibios 9.",
                     "He is an egotistical military officer for the Democratic Order of Planets(DOoP).",
-                    "He is the Planet Express janitor.",
+                    "Aslo know as Acting Unit 0.8, Thespo-mat, and David Duchovny.  He was also given his 'Un-holy acting talent' from the Robot Devil.",
                     "He is a Nibblonian who has existed since the beginning of time.",
                     "He is the accountant for Planet Express and a long time friend of Professor Farnsworth.",
                     "All glory to the Hypnotoad!",
                     "He is an Omicronian and is Emperor of the planet Omicron Persei 8.",
                     "As one of the richest people on Earth, she maintains her public image as a sweet, matronly figure.",
                     "He owns a golden fiddle and lives in a New Jersey amusement park.",
-                    "He is a robotic peace officer for the New New York Police Department.",
-                    "Aslo know as Acting Unit 0.8, Thespo-mat, and David Duchovny.  He was also given his 'Un-holy acting talent' from the Robot Devil.",
-                    "He is a robot modeled after an ancient Roman hedonist."],
+                    ],
           
             wordChosen: "",
             wordGuess: [],
@@ -162,7 +160,7 @@
                 this.idInfo.style.display = "block";
                 this.idWorL.innerHTML = "You Won!";
                 this.idSound.play();
-                setTimeout(myFunction , 10000);
+                setTimeout(delayStart , 10000);
               }
             },
 
@@ -182,7 +180,7 @@
                 this.idInfo.style.display = "block";
                 this.idWorL.innerHTML = "You Lost!";
                 this.idSound.play();
-                setTimeout(myFunction , 10000);
+                setTimeout(delayStart , 10000);
               }
             },
 
@@ -279,7 +277,7 @@
           
       }
 
-    //timer to restart the game
-    function myFunction() {
-    game.start();
-}
+      //timer to restart the game
+      function delayStart() {
+        game.start();
+      }
