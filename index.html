@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     
   </head>
-  <body>
+  <body id="body">
     
     <!-- will hold the game title/wins/loses -->
     <header>
@@ -62,7 +62,9 @@
     <footer>
     <h4>Press Any Key To Play</h4>
     <h5>©copyright 2017 - Andrew Dicer</h5></footer>
-
+    <div class="checkbox">
+      <input type="checkbox" onclick="game.alien()" name="alien" id="alien" value=""> -Alien
+    </div>
     <audio id="sound">
       <source src="" type="audio/mpeg">
         Your browser does not support the audio element.

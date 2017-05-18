@@ -1,4 +1,15 @@
+@font-face {
+    font-family: alienFont;
+    src: url(../fonts/fr-fal1.ttf);
+	}
+
+@font-face {
+	font-family: future;
+	src: url(../fonts/fr-bold.ttf);
+}
+
 body {
+	font-family: future;
 	position: relative;
 	overflow: hidden;
 	clear:both;
@@ -66,12 +77,14 @@ main {
 
 #wins {
 	padding-top: 25px;
+	padding-left: 10px;
 	top: 25px;
 	left: 0;
 }
 
 #losses {
 	padding-top: 25px;
+	padding-right: 10px;
 	top: 25px;
 	right:0;
 }
@@ -91,7 +104,7 @@ main {
 #name {
 	padding-top: 20px;
 	text-align: center; 
-	font-size: 38px;
+	font-size: 32px;
 	text-shadow: 1px 1px 2px #000;
 }
 
@@ -103,30 +116,32 @@ main {
 #wordBio {
 	padding: 10px 15px;
 	text-align: center;
-	font-size: 20px;	
+	font-size: 16px;	
 }
 
 #WorL {
 	position: absolute;
 	bottom: 15px;
-	left: 95px;
+	left: 83px;
 	padding-top: 20px;
-	font-size: 40px;
+	font-size: 35px;
 	text-align: center;
 }
 
 #box {height: 285px;}
 
 #box2 {
+	padding-top: 15px;
 	border-bottom: solid #000 1px; 
-	height: 100px; 
+	height: 85px; 
 	text-align: center
 }
 
 #word {
+	font-family: times;
 	width: 100%; 
 	text-align: center; 
-	font-size: 28px; 
+	font-size: 24px; 
 	padding: 100px 5px 0;
 }
 
@@ -154,8 +169,8 @@ main {
 }
 
 #letterUsed {
-	font-size: 30px; 
-	padding-top: 0px;
+	font-size: 20px; 
+	padding-top: 10px;
 }
 
 footer {
@@ -164,6 +179,11 @@ footer {
 	background-color: #ccc;
 	height: 34px;
 	text-align: center;
+}
+
+.checkbox {
+	font-family: Times;
+	padding-top: 10px;
 }
 
 h4 {

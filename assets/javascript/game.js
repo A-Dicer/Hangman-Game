@@ -4,11 +4,11 @@
           var game = {       
             words: ["PHILIP-J-FRY", "BENDER", "TURANGA-LEELA", "DR-ZOIDBERG", "AMY-WONG", "THE-PROFESSOR", "KIF-KROKER", "ZAPP-BRANNIGAN", "CALCULON", "NIBBLER", "HERMES-CONRAD", "HYPNOTOAD", "LRRR", "MOM", "ROBOT-DEVIL",],
             
-            hints: [ "He is generally very lazy at work, spending most of his time in the office sitting on the couch: watching TV and drinking Slurm.",
+            hints: [ "He is generally very lazy at work, spending most of his time in the office sitting on the couch.",
                     "He gambles, smokes cigars, consorts with hookerbots, has 100,000 terabytes of porn on his hard drive.",
                     "She has a 'no rain or sleet' attitude and a 'kick-your-arse' grace.",
                     "He was born on the Planet Decapod 10 and moved to Earth to practice medicine after giving up comedy once.",
-                    "She is a cute (though less cute as she has previously had cuteness reduction surgery).",
+                    "She is cute (though less cute as she has previously had cuteness reduction surgery).",
                     "He is pushing the limits of even the 31st century at an agе of well over 160.",
                     "He is an undisclosed Amphibiosan alien of light green color from the planеt Amphibios 9.",
                     "He is an egotistical military officer for the Democratic Order of Planets(DOoP).",
@@ -47,6 +47,19 @@
             idHint: document.getElementById("hint"),
             idSound: document.getElementById("sound"),
 
+            //changes text on page to be in alien
+            alien: function() {
+              if(document.getElementById("alien").checked) {
+                document.getElementById('body').style.fontFamily = "alienFont";
+                document.getElementById('body').style.fontSize = "16px";
+              }
+              else {
+                document.getElementById('body').style.fontFamily = "";
+                document.getElementById('body').style.fontSize = "";
+              }
+            },
+
+            //sets up the info page for after win/lose
             info: function(){
               for (var i = 0; i < this.words.length; i++){
                 if(this.wordChosen.join("") === this.words[i]){ this.wordNumber = i}
@@ -58,6 +71,7 @@
               this.idSound.src = "assets/sounds/" + this.wordNumber + ".mp3";
             },
 
+            //gets the win/loss percetages
             Percent: function(){
               this.winP = this.wins / (this.wins + this.losses) *100 ; 
               this.lossP = this.losses / (this.losses + this.wins) *100;
@@ -160,6 +174,10 @@
                 this.idInfo.style.display = "block";
                 this.idWorL.innerHTML = "You Won!";
                 this.idSound.play();
+                
+                //resets so you can't acciently run the function more than once
+                this.guesses = 8;
+                this.wordGuess = [];
                 setTimeout(delayStart , 10000);
               }
             },
@@ -180,6 +198,9 @@
                 this.idInfo.style.display = "block";
                 this.idWorL.innerHTML = "You Lost!";
                 this.idSound.play();
+
+                //resets so you can't acciently run the function more than once
+                this.guesses = 8;
                 setTimeout(delayStart , 10000);
               }
             },
@@ -274,8 +295,8 @@
         //check to see if you lost
         game.lossCheck();
 
-          
       }
+
 
       //timer to restart the game
       function delayStart() {
