@@ -27,7 +27,6 @@
             wordGuess: [],
             wordNumber: 0,
             guesses: 8,
-            WorL: "",
             wins: 0,
             winP: "",
             losses: 0,
@@ -47,17 +46,16 @@
             idWordImg: document.getElementById("wordImg"),
             idWordBio: document.getElementById("wordBio"),
             idWorL: document.getElementById("WorL"),
+            idHint: document.getElementById("hint"),
 
             info: function(){
               for (var i = 0; i < this.words.length; i++){
                 if(this.wordChosen.join("") === this.words[i]){ this.wordNumber = i}
               }
-              console.log(this.wordNumber);
 
               this.idName.innerHTML = this.wordChosen.join("");
               this.idWordImg.src = "assets/images/" + this.wordNumber + ".png";
               this.idWordBio.innerHTML = this.hints[this.wordNumber];
-              this.idWorL.innerHTML = "You " + this.WorL + "!";
             },
 
             Percent: function(){
@@ -67,9 +65,11 @@
             
             //code to start / restart the game
             start: function(){
+              this.idInfo.style.display = "none";
               this.wordGuess = [];
               this.letterUsed = [];
               this.guesses = 8;
+              this.idHint.innerHTML = ""
               this.idComment.innerHTML = "";
               this.idWord.innerHTML = "";
               this.idGuess.innerHTML = "Guesses Remaining: " + 8;
@@ -157,21 +157,28 @@
                 this.Percent();
                 this.idWins.innerHTML = "Wins: " + this.wins + " - (" + this.winP.toFixed() + "%)";
                 this.idLosses.innerHTML = "Losses: " + this.losses + " - (" + this.lossP.toFixed() + "%)";
-                this.WorL = "Won";
                 this.idInfo.style.display = "block";
-                //this.start();
+                this.idWorL.innerHTML = "You Won!";
+                setTimeout(myFunction , 10000);
               }
             },
 
             //checks to see if you lost
             lossCheck: function(){
+
+              //check to see if you need a hint
+              if(this.guesses < 5){
+                this.idHint.innerHTML = this.hints[this.wordNumber];
+              }
+
               if (this.guesses === 0){
                 this.losses = this.losses + 1;
                 this.Percent();
                 this.idWins.innerHTML = "Wins: " + this.wins + " - (" + this.winP.toFixed() + "%)";
                 this.idLosses.innerHTML = "Losses: " + this.losses + " - (" + this.lossP.toFixed() + "%)";
-                this.WorL = "Lost";
-                this.start();
+                this.idInfo.style.display = "block";
+                this.idWorL.innerHTML = "You Lost!";
+                setTimeout(myFunction , 10000);
               }
             },
 
@@ -264,6 +271,11 @@
 
         //check to see if you lost
         game.lossCheck();
+
+          
       }
-  
-  
+
+    //timer to restart the game
+    function myFunction() {
+    game.start();
+}
