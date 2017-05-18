@@ -18,6 +18,8 @@ header {
 	background-color: #ccc;
 	color: #fff;
 	text-shadow: 1px 1px #000;
+	background-image: url("../images/bgHeader.jpg");
+	background-position: 100px -100px;
 }
 
 h1 {
@@ -32,11 +34,13 @@ h1 {
 h3 {font-size: 25px;}
 
 main {
+	position: relative;
 	background-image: url(../images/gameBackground.jpg);
 	background-size: 800px;
 	background-position: -210px -20px;
 	color: #fff;
 	text-shadow: 1px 1px #000;
+	text-align: justify;
 }
 
 #logo {
@@ -61,15 +65,54 @@ main {
 .score {width: 150px;}
 
 #wins {
-	position: absolute;
-	bottom: -25px;
+	padding-top: 25px;
+	top: 25px;
 	left: 0;
 }
 
 #losses {
-	position: absolute;
-	bottom: -25px;
+	padding-top: 25px;
+	top: 25px;
 	right:0;
+}
+
+#info{
+	position: absolute;
+	display: ;
+	top:0;
+	left:0;
+	height: 483px;
+	width: 348px;
+	background-image: url(../images/gameBackground.jpg);
+	background-size: 800px;
+	background-position: -210px -20px;
+}
+
+#name {
+	padding-top: 20px;
+	text-align: center; 
+	font-size: 38px;
+	text-shadow: 1px 1px 2px #000;
+}
+
+#wordImg {
+	padding-left: 50px;
+	padding-top:10px;
+}
+
+#wordBio {
+	padding: 10px 15px;
+	text-align: center;
+	font-size: 20px;	
+}
+
+#WorL {
+	position: absolute;
+	bottom: 15px;
+	left: 25%;
+	padding-top: 20px;
+	font-size: 40px;
+	text-align: center;
 }
 
 #box {height: 335px;}
